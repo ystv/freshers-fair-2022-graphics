@@ -1,0 +1,15 @@
+html {
+  width: 100%;
+  height: 100%;
+  font-size: calc(100vw / 1920);
+  font-family: OpenSans, sans-serif;
+}
+
+@font-face {
+  font-family: OpenSans;
+  src: url("./assets/OpenSans-VariableFont_wdth\,wght.ttf");
+  font-style: normal;
+  font-stretch: normal;
+  font-weight: 300 800;
+  font-variation-settings: "wght" 375;
+}

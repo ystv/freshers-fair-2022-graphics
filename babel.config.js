@@ -8,5 +8,7 @@ module.exports = {
       },
     ],
     "@babel/preset-typescript",
+    "@emotion/babel-preset-css-prop",
   ],
+  plugins: ["@emotion"],
 };
