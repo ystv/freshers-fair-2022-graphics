@@ -35,7 +35,7 @@ function Graphics() {
           margin: 0 auto;
           display: grid;
           grid-template-rows: auto auto;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: 1fr auto 1fr;
           gap: 8rem;
           padding: 4rem 32rem;
           white-space: nowrap;
@@ -95,9 +95,9 @@ function Graphics() {
           css={css`
             height: 100%;
             grid-row: 1;
-            grid-column: ${data.name2 ? "1" : "1 / 3"};
+            grid-column: ${data.name2 ? "1" : "1 / 4"};
             text-align: ${data.name2 ? "right" : "center"};
-            padding-right: 16rem;
+            padding-right: 8rem;
           `}
         >
           <motion.span
@@ -126,7 +126,8 @@ function Graphics() {
               height: 100%;
               grid-row: 1;
               text-align: left;
-              padding-left: 16rem;
+              padding-left: 8rem;
+              grid-column: 3;
             `}
           >
             <motion.span
@@ -157,24 +158,38 @@ function Graphics() {
                 font-size: 24pt;
                 font-weight: 700;
                 grid-row: 2;
-                grid-column: ${data.societySocials ? "1" : "1 / 3"};
+                grid-column: ${data.societySocials ? "1" : "1 / 4"};
                 text-align: ${data.societySocials ? "right" : "center"};
               `}
             >
               {data.society}
             </motion.span>
             {data.societySocials && (
-              <motion.span
-                css={css`
-                  font-size: 24pt;
-                  font-weight: 400;
-                  font-style: italic;
-                  grid-row: 2;
-                  grid-column: 2;
-                `}
-              >
-                &middot;&nbsp;{data.societySocials}
-              </motion.span>
+              <>
+                <motion.span
+                  css={css`
+                    font-size: 24pt;
+                    font-weight: 400;
+                    font-style: italic;
+                    grid-row: 2;
+                    grid-column: 2;
+                  `}
+                >
+                  &middot;
+                </motion.span>
+                <motion.span
+                  css={css`
+                    font-size: 24pt;
+                    font-weight: 400;
+                    font-style: italic;
+                    grid-row: 2;
+                    grid-column: 3;
+                    text-align: left;
+                  `}
+                >
+                  {data.societySocials}
+                </motion.span>
+              </>
             )}
           </>
         )}
