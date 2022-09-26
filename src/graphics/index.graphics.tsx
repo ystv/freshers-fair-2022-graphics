@@ -39,9 +39,26 @@ function Graphics() {
           gap: 8rem;
           padding: 4rem 32rem;
           white-space: nowrap;
+          text-overflow: clip;
         `}
+        initial="hidden"
+        animate={control.open ? "visible" : "hidden"}
+        exit="hidden"
+        variants={{
+          visible: {
+            // width: "auto",
+            opacity: 1,
+          },
+          hidden: {
+            // width: 0,
+            opacity: 0,
+          },
+        }}
+        transition={{
+          duration: 0.7,
+        }}
       >
-        <svg
+        <motion.svg
           width="51px"
           viewBox="0 0 51 178"
           preserveAspectRatio="none"
@@ -59,13 +76,13 @@ function Graphics() {
             fill="rgb(51, 51, 51)"
             d="M14.193,0.000 L45.807,0 L45.807,178.0 L40.449,178.0 L14.193,0.000 Z"
           />
-          <path
+          <motion.path
             fill-rule="evenodd"
             fill="rgb(34, 126, 228)"
             d="M14.231,1.218 L7.962,2.806 C2.565,4.174 -0.914,10.695 0.192,17.372 L24.995,167.169 C26.100,173.846 31.372,178.149 36.769,176.782 L43.038,175.194 C48.435,173.826 51.914,167.305 50.808,160.628 L26.005,10.831 C24.900,4.154 19.628,-0.149 14.231,1.218 Z"
           />
-        </svg>
-        <svg
+        </motion.svg>
+        <motion.svg
           width="51px"
           viewBox="0 0 51 178"
           preserveAspectRatio="none"
@@ -85,12 +102,12 @@ function Graphics() {
             fill="rgb(51, 51, 51)"
             d="M36.127,0 L13.817,0 L13.813,176.873 L14.109,176.873 L36.127,0 Z"
           />
-          <path
+          <motion.path
             fill-rule="evenodd"
             fill="rgb(34, 126, 228)"
             d="M36.793,1.224 L43.009,2.799 C48.419,4.170 51.907,10.709 50.799,17.403 L26.010,167.138 C24.902,173.832 19.618,178.147 14.207,176.776 L7.991,175.201 C2.581,173.830 -0.907,167.291 0.201,160.597 L24.990,10.862 C26.098,4.168 31.382,-0.147 36.793,1.224 Z"
           />
-        </svg>
+        </motion.svg>
         <motion.div
           css={css`
             height: 100%;
