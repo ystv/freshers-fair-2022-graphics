@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "presetName": {
+        "type": "string",
+        "default": ""
+      },
+      "name": {
+        "type": "string",
+        "default": ""
+      },
+      "position": {
+        "type": "string",
+        "default": ""
+      },
+      "name2": {
+        "type": "string",
+        "default": ""
+      },
+      "position2": {
+        "type": "string",
+        "default": ""
+      },
+      "society": {
+        "type": "string",
+        "default": ""
+      },
+      "societySocials": {
+        "type": "string",
+        "default": ""
+      }
+    },
+    "required": [
+      "presetName",
+      "name",
+      "name2",
+      "position",
+      "position2",
+      "society",
+      "societySocials"
+    ]
+  }
+}

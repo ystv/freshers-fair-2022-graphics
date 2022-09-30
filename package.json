@@ -25,6 +25,20 @@
         "file": "dashboard.html",
         "headerColor": "#525F78",
         "workspace": "Freshers Fair 2022"
+      },
+      {
+        "name": "edit-presets",
+        "title": "Edit Presets",
+        "width": 4,
+        "file": "editPresets.html",
+        "headerColor": "#525F78",
+        "dialog": true,
+        "dialogButtons": [
+          {
+            "name": "save",
+            "type": "confirm"
+          }
+        ]
       }
     ],
     "graphics": [

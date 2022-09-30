@@ -1,11 +1,14 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React, { useState } from "react";
+import { createRoot } from "react-dom/client";
 import "antd/dist/antd.css";
 import "./dashboard.css";
-import { Form, Input, Row, Col, Button } from "antd";
-import { useReplicantValue } from "common/useReplicant";
+import { Form, Input, Row, Col, Button, Select } from "antd";
+import { useOnlyReplicantValue, useReplicantValue } from "common/useReplicant";
 import { Data } from "common/types/data";
 import { Control } from "common/types/control";
+import { DataEdit } from "./dataEdit";
+import { Presets } from "common/types/presets";
+import { css } from "@emotion/react";
 
 function Dashboard() {
   const [data, setData] = useReplicantValue<Data>("data", undefined, {
@@ -27,51 +30,33 @@ function Dashboard() {
       },
     }
   );
+  const [presets, setPresets] = useReplicantValue<Presets>(
+    "presets",
+    undefined,
+    {
+      defaultValue: [],
+    }
+  );
+  const [activePreset, setActivePreset] = useState<string>("");
+  function saveAsPreset() {
+    const name = prompt("Enter preset name");
+    if (!name) {
+      return;
+    }
+    setPresets([
+      ...presets,
+      {
+        presetName: name,
+        ...data,
+      },
+    ]);
+  }
   return (
     <>
       <Row>
         <Col span={12}>
           <Form>
-            <Form.Item label="Name 1" required>
-              <Input
-                value={data.name}
-                onChange={(e) => setData({ ...data, name: e.target.value })}
-              />
-            </Form.Item>
-            <Form.Item label="Position 1">
-              <Input
-                value={data.position}
-                onChange={(e) => setData({ ...data, position: e.target.value })}
-              />
-            </Form.Item>
-            <Form.Item label="Name 2">
-              <Input
-                value={data.name2}
-                onChange={(e) => setData({ ...data, name2: e.target.value })}
-              />
-            </Form.Item>
-            <Form.Item label="Position 2">
-              <Input
-                value={data.position2}
-                onChange={(e) =>
-                  setData({ ...data, position2: e.target.value })
-                }
-              />
-            </Form.Item>
-            <Form.Item label="Society / Role">
-              <Input
-                value={data.society}
-                onChange={(e) => setData({ ...data, society: e.target.value })}
-              />
-            </Form.Item>
-            <Form.Item label="Social Media Handle">
-              <Input
-                value={data.societySocials}
-                onChange={(e) =>
-                  setData({ ...data, societySocials: e.target.value })
-                }
-              />
-            </Form.Item>
+            <DataEdit data={data} setData={setData} />
           </Form>
         </Col>
         <Col span={12}>
@@ -91,9 +76,38 @@ function Dashboard() {
             </Button>
           )}
         </Col>
+        <Col>
+          <b>Presets</b>
+          <Select
+            value={activePreset}
+            onChange={(val) => {
+              let preset = presets.find((preset) => preset.presetName === val);
+              if (!preset) {
+                return;
+              }
+              setActivePreset(val);
+
+              const data = Object.assign({}, preset) as Data;
+              // @ts-expect-error converting preset to data
+              delete data.presetName;
+              setData(data);
+            }}
+            css={css`
+              min-width: 12rem;
+            `}
+          >
+            {presets.map((preset) => (
+              <Select.Option value={preset.presetName}>
+                {preset.presetName}
+              </Select.Option>
+            ))}
+          </Select>
+          <Button nodecg-dialog="edit-presets">Edit Presets</Button>
+          <Button onClick={saveAsPreset}>Save As Preset</Button>
+        </Col>
       </Row>
     </>
   );
 }
 
-ReactDOM.render(<Dashboard />, document.getElementById("root"));
+createRoot(document.getElementById("root")!).render(<Dashboard />);
